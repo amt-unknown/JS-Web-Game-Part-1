@@ -24,9 +24,18 @@ function newItem(characterModel, coordinate){
 }
 
 //Creates background with respect to window size. 
-function setBackground(characterModel){
-    for(let i = 0; i < Math.ceil(window.innerWidth/100); i++){
-        for(let j = 0; j < Math.ceil(window.innerHeight/100); j++){
+function setBackground(characterModel, fixedBorder){
+    let xBound = Math.ceil(window.innerWidth/100);
+    let yBound = Math.ceil(window.innerHeight/100)
+
+    //change from fullscreen to minimal screensize.
+    if(fixedBorder != 'false'){
+        xBound = 7;
+        yBound = 8;
+    }
+
+    for(let i = 0; i < xBound; i++){
+        for(let j = 0; j < yBound; j++){
 
             //Toggle to decide where ground-sky barrier exists
             let indexBackground = 0;
@@ -44,7 +53,8 @@ function setBackground(characterModel){
 }
 
 //Create background 
-setBackground(['grass.png','sky.png']);
+let border = window.prompt(`Would you like to render onto a fixed window-size?(Enter "true"/"false"`);
+setBackground(['grass.png','sky.png'], border);
 
 //Creating all images by function calls
 newImage('green-character.gif',[100,100]);
